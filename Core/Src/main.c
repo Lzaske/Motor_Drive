@@ -66,7 +66,6 @@ void SystemClock_Config(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-  #define arry_size 256
   extern uint8_t _485rx_buffer[256];
   extern uint8_t received_data[_485RX_BUFFER_SIZE];
   uint16_t received_length = 0; 

@@ -9,11 +9,12 @@
 #define RS485_EN_GPIO_Port GPIOD
 #define RS485_EN_Pin       GPIO_PIN_15
 #define _485RX_BUFFER_SIZE 256
-#define rx_data_size 256
+#define _485TX_BUFFER_SIZE 256
 extern uint8_t _485rx_buffer[_485RX_BUFFER_SIZE];
 extern uint16_t rx_index;
-extern uint8_t rx_data[rx_data_size];
 extern uint8_t received_data[_485RX_BUFFER_SIZE];
+extern uint8_t _485tx_buffer[_485TX_BUFFER_SIZE];
+extern uint8_t _485tx_data[_485TX_BUFFER_SIZE];
 /* RS485 TX/RX Control */
 #define RS485_TX_ENABLE()   HAL_Delay(1);\
                             HAL_GPIO_WritePin(RS485_EN_GPIO_Port, RS485_EN_Pin, GPIO_PIN_SET);\

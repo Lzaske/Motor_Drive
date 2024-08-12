@@ -11,7 +11,7 @@ uint8_t _485rx_buffer[_485RX_BUFFER_SIZE]; //接收缓冲区
 uint16_t rx_index; // 接收缓冲区索引
 uint8_t received_data[_485RX_BUFFER_SIZE]; //接收数据
 uint8_t _485tx_buffer[_485TX_BUFFER_SIZE]; //发送缓冲区
-uint8_t _485tx_data[_485TX_BUFFER_SIZE];  //发送数据
+uint8_t _485txDataSize = 0;
 /*
 * @breif   RS485初始化
 * @param  

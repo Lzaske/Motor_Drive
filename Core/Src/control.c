@@ -1,6 +1,6 @@
 #include "control.h"
 #include "gpio.h"
-#include "rs485.h"
+#include "rs485_drc.h"
 /*#include "dmaPrintf.h"*/
 
 
@@ -54,10 +54,10 @@ void control_PackCmd(uint8_t *buffer, uint8_t cmd, uint8_t id, uint8_t size, uin
             buffer[LEAST_FRAME_SIZE + i] = data[i];
             buffer[LEAST_FRAME_SIZE + size] += buffer[LEAST_FRAME_SIZE + i];
         }
-        _485TX_BUFFER_SIZE = i + LEAST_FRAME_SIZE + 1; // 需要发送的数据总长度
+        _485txDataSize = i + LEAST_FRAME_SIZE + 1; // 需要发送的数据总长度
     }
     else
-        _485TX_BUFFER_SIZE = LEAST_FRAME_SIZE; // 需要发送的数据总长度
+        _485txDataSize = LEAST_FRAME_SIZE; // 需要发送的数据总长度
 }
 
 /*********************************************************************************
@@ -78,36 +78,36 @@ void control_Send(uint8_t cmd, uint8_t id, int64_t value)
         openCtlData = value;
         dataSize = 2;
 
-        control_PackCmd(uart1TxBuffer, cmd, id, dataSize, (uint8_t *)&openCtlData);
-        HAL_UART_Transmit_DMA(&huart1, uart1TxBuffer, _485TX_BUFFER_SIZE);
-        _485RX_BUFFER_SIZE = LEAST_FRAME_SIZE + 7 + 1;
+        control_PackCmd(_485tx_buffer, cmd, id, dataSize, (uint8_t *)&openCtlData);
+        HAL_UART_Transmit_DMA(&huart1, _485tx_buffer, _485txDataSize);
+        _485txDataSize = LEAST_FRAME_SIZE + 7 + 1;
     }
     else if (cmd == CMD_TORQUE_CONTROL)
     {
         torqueCtlData = value;
         dataSize = 2;
 
-        control_PackCmd(uart1TxBuffer, cmd, id, dataSize, (uint8_t *)&torqueCtlData);
-        HAL_UART_Transmit_DMA(&huart1, uart1TxBuffer, _485TX_BUFFER_SIZE);
-        _485RX_BUFFER_SIZE = LEAST_FRAME_SIZE + 7 + 1;
+        control_PackCmd(_485tx_buffer, cmd, id, dataSize, (uint8_t *)&torqueCtlData);
+        HAL_UART_Transmit_DMA(&huart1, _485tx_buffer, _485txDataSize);
+        _485txDataSize = LEAST_FRAME_SIZE + 7 + 1;
     }
     else if (cmd == CMD_SPEED_CONTROL)
     {
         speedCtlData = value;
         dataSize = 4;
 
-        control_PackCmd(uart1TxBuffer, cmd, id, dataSize, (uint8_t *)&speedCtlData);
-        HAL_UART_Transmit_DMA(&huart1, uart1TxBuffer, _485TX_BUFFER_SIZE);
-        _485RX_BUFFER_SIZE = LEAST_FRAME_SIZE + 7 + 1;
+        control_PackCmd(_485tx_buffer, cmd, id, dataSize, (uint8_t *)&speedCtlData);
+        HAL_UART_Transmit_DMA(&huart1, _485tx_buffer, _485txDataSize);
+        _485txDataSize = LEAST_FRAME_SIZE + 7 + 1;
     }
     else if (cmd == CMD_ANGLE_CONTROL1)
     {
         angleCtlData = value;
         dataSize = 8;
 
-        control_PackCmd(uart1TxBuffer, cmd, id, dataSize, (uint8_t *)&angleCtlData);
-        HAL_UART_Transmit_DMA(&huart1, uart1TxBuffer, _485TX_BUFFER_SIZE);
-        _485RX_BUFFER_SIZE = LEAST_FRAME_SIZE + 7 + 1;
+        control_PackCmd(_485tx_buffer, cmd, id, dataSize, (uint8_t *)&angleCtlData);
+        HAL_UART_Transmit_DMA(&huart1, _485tx_buffer, _485txDataSize);
+        _485txDataSize = LEAST_FRAME_SIZE + 7 + 1;
     }
 }
 

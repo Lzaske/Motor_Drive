@@ -16,14 +16,14 @@
         {
             "name": "Motor_Drive",
             "includePath": [
-                "d:\\Onedrive\\Work\\Motor_Drive\\Core\\Inc",
-                "d:\\Onedrive\\Work\\Motor_Drive\\Drivers\\STM32F4xx_HAL_Driver\\Inc",
-                "d:\\Onedrive\\Work\\Motor_Drive\\Drivers\\STM32F4xx_HAL_Driver\\Inc\\Legacy",
-                "d:\\Onedrive\\Work\\Motor_Drive\\Drivers\\CMSIS\\Device\\ST\\STM32F4xx\\Include",
-                "d:\\Onedrive\\Work\\Motor_Drive\\Drivers\\CMSIS\\Include",
-                "d:\\Onedrive\\Work\\Motor_Drive\\MDK-ARM",
-                "d:\\Onedrive\\Work\\Motor_Drive\\Core\\Src",
-                "d:\\Onedrive\\Work\\Motor_Drive\\Drivers\\STM32F4xx_HAL_Driver\\Src"
+                "f:\\Work\\Motor_Drive\\Core\\Inc",
+                "f:\\Work\\Motor_Drive\\Drivers\\STM32F4xx_HAL_Driver\\Inc",
+                "f:\\Work\\Motor_Drive\\Drivers\\STM32F4xx_HAL_Driver\\Inc\\Legacy",
+                "f:\\Work\\Motor_Drive\\Drivers\\CMSIS\\Device\\ST\\STM32F4xx\\Include",
+                "f:\\Work\\Motor_Drive\\Drivers\\CMSIS\\Include",
+                "f:\\Work\\Motor_Drive\\MDK-ARM",
+                "f:\\Work\\Motor_Drive\\Core\\Src",
+                "f:\\Work\\Motor_Drive\\Drivers\\STM32F4xx_HAL_Driver\\Src"
             ],
             "defines": [
                 "USE_HAL_DRIVER",

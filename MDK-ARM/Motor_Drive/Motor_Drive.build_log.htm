@@ -3,85 +3,87 @@
 <pre>
 <h1>礦ision Build Log</h1>
 <h2>Tool Versions:</h2>
-IDE-Version: μVision V5.28.0.0
-Copyright (C) 2019 ARM Ltd and ARM Germany GmbH. All rights reserved.
-License Information: 23 2787454338@qq.com, 123412, LIC=YA39H-WP0H5-9U24U-S5P6I-8PH1S-V5ZYE
+IDE-Version: μVision V5.23.0.0
+Copyright (C) 2017 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: 1111 1111, 1111, LIC=JL28G-VBCUF-56PQ2-9W604-ASN4Q-J1Y0R
  
 Tool Versions:
-Toolchain:       MDK-ARM Plus  Version: 5.28.0.0
-Toolchain Path:  D:\Keil\ARM\ARMCC\Bin
-C Compiler:      Armcc.exe V5.06 update 6 (build 750)
-Assembler:       Armasm.exe V5.06 update 6 (build 750)
-Linker/Locator:  ArmLink.exe V5.06 update 6 (build 750)
-Library Manager: ArmAr.exe V5.06 update 6 (build 750)
-Hex Converter:   FromElf.exe V5.06 update 6 (build 750)
-CPU DLL:         SARMCM3.DLL V5.28.0.0
-Dialog DLL:      DCM.DLL V1.17.3.0
-Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.0.6.0
-Dialog DLL:      TCM.DLL V1.36.2.0
+Toolchain:       MDK-ARM Plus  Version: 5.23
+Toolchain Path:  D:\Keil v5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 4 (build 422)
+Assembler:       Armasm.exe V5.06 update 4 (build 422)
+Linker/Locator:  ArmLink.exe V5.06 update 4 (build 422)
+Library Manager: ArmAr.exe V5.06 update 4 (build 422)
+Hex Converter:   FromElf.exe V5.06 update 4 (build 422)
+CPU DLL:         SARMCM3.DLL V5.23
+Dialog DLL:      DCM.DLL V1.15.0.0
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V2.0.18.0
+Dialog DLL:      TCM.DLL V1.27.0.0
  
 <h2>Project:</h2>
-D:\Onedrive\Work\Motor_Drive\MDK-ARM\Motor_Drive.uvprojx
-Project File Date:  08/08/2024
+F:\Work\Motor_Drive\MDK-ARM\Motor_Drive.uvprojx
+Project File Date:  08/11/2024
 
 <h2>Output:</h2>
-*** Using Compiler 'V5.06 update 6 (build 750)', folder: 'D:\Keil\ARM\ARMCC\Bin'
-Rebuild target 'Motor_Drive'
-assembling startup_stm32f407xx.s...
-compiling gpio.c...
-compiling usart.c...
-compiling stm32f4xx_hal_tim_ex.c...
-compiling stm32f4xx_hal_rcc_ex.c...
-compiling stm32f4xx_hal_uart.c...
-compiling stm32f4xx_it.c...
-compiling dma.c...
-compiling rs485_drc.c...
-compiling stm32f4xx_hal_flash_ex.c...
-compiling stm32f4xx_hal_flash.c...
-compiling stm32f4xx_hal_flash_ramfunc.c...
-compiling stm32f4xx_hal_tim.c...
-compiling main.c...
-../Core/Src/main.c(97): warning:  #223-D: function "printf" declared implicitly
-    printf ("----- RS485 1# Board -----\r\n");
-../Core/Src/main.c: 1 warning, 0 errors
-compiling stm32f4xx_hal_msp.c...
-compiling stm32f4xx_hal_rcc.c...
-compiling stm32f4xx_hal_exti.c...
-compiling stm32f4xx_hal_cortex.c...
-compiling system_stm32f4xx.c...
-compiling stm32f4xx_hal_dma.c...
-compiling stm32f4xx_hal_pwr.c...
-compiling stm32f4xx_hal_pwr_ex.c...
-compiling stm32f4xx_hal.c...
-compiling stm32f4xx_hal_gpio.c...
-compiling stm32f4xx_hal_dma_ex.c...
-linking...
-Program Size: Code=7972 RO-data=456 RW-data=24 ZI-data=2056  
-FromELF: creating hex file...
-"Motor_Drive\Motor_Drive.axf" - 0 Error(s), 1 Warning(s).
+*** Using Compiler 'V5.06 update 4 (build 422)', folder: 'D:\Keil v5\ARM\ARMCC\Bin'
+Build target 'Motor_Drive'
+compiling control.c...
+..\Core\Src\control.c(57): error:  #137: expression must be a modifiable lvalue
+          
+EAST_FRAME_SIZE + 1; // 需要发送的数据总长度
+..\Core\Src\control.c(60): error:  #137: expression must be a modifiable lvalue
+          
+EAST_FRAME_SIZE; // 需要发送的数据总长度
+..\Core\Src\control.c(81): error:  #20: identifier "uart1TxBuffer" is undefined
+          control_PackCmd(uart1TxBuffer, cmd, id, dataSize, (uint8_t *)&openCtlData);
+..\Core\Src\control.c(83): error:  #137: expression must be a modifiable lvalue
+          
+EAST_FRAME_SIZE + 7 + 1;
+..\Core\Src\control.c(90): error:  #20: identifier "uart1TxBuffer" is undefined
+          control_PackCmd(uart1TxBuffer, cmd, id, dataSize, (uint8_t *)&torqueCtlData);
+..\Core\Src\control.c(92): error:  #137: expression must be a modifiable lvalue
+          
+EAST_FRAME_SIZE + 7 + 1;
+..\Core\Src\control.c(99): error:  #20: identifier "uart1TxBuffer" is undefined
+          control_PackCmd(uart1TxBuffer, cmd, id, dataSize, (uint8_t *)&speedCtlData);
+..\Core\Src\control.c(101): error:  #137: expression must be a modifiable lvalue
+          
+EAST_FRAME_SIZE + 7 + 1;
+..\Core\Src\control.c(108): error:  #20: identifier "uart1TxBuffer" is undefined
+          control_PackCmd(uart1TxBuffer, cmd, id, dataSize, (uint8_t *)&angleCtlData);
+..\Core\Src\control.c(110): error:  #137: expression must be a modifiable lvalue
+          
+EAST_FRAME_SIZE + 7 + 1;
+..\Core\Src\control.c(183): warning:  #223-D: function "LED1_TOGGLE" declared implicitly
+              LED1_TOGGLE();
+..\Core\Src\control.c(185): warning:  #223-D: function "printf" declared implicitly
+              printf ("motorTemperature = %d, motorPowerOrTorque = %d, motorSpeed = %d, motorEncoder = %d\n", motorTemperature, motorPowerOrTorque, motorSpeed, motorEncoder);
+..\Core\Src\control.c(189): warning:  #223-D: function "LED1_TOGGLE" declared implicitly
+              LED1_TOGGLE();
+..\Core\Src\control.c(191): warning:  #223-D: function "printf" declared implicitly
+              printf ("commandSendCount = %d, unreceivedCount = %d\n", commandSendCount, commandUnreceivedCount);
+..\Core\Src\control.c: 4 warnings, 10 errors
+"Motor_Drive\Motor_Drive.axf" - 10 Error(s), 4 Warning(s).
 
 <h2>Software Packages used:</h2>
 
 Package Vendor: ARM
-                http://www.keil.com/pack/ARM.CMSIS.5.5.1.pack
-                ARM.CMSIS.5.5.1
-                CMSIS (Cortex Microcontroller Software Interface Standard)
-   * Component: CORE Version: 5.2.0
-
-Package Vendor: Keil
-                https://www.keil.com/pack/Keil.STM32F4xx_DFP.2.17.1.pack
-                Keil.STM32F4xx_DFP.2.17.1
-                STMicroelectronics STM32F4 Series Device Support, Drivers and Examples
+                http://www.keil.com/pack/ARM.CMSIS.5.8.0.pack
+                ARM::CMSIS:CORE:5.5.0
+                CMSIS (Common Microcontroller Software Interface Standard)
+   * Component: CORE Version: 5.5.0
 
 <h2>Collection of Component include folders:</h2>
   .\RTE\_Motor_Drive
-  D:\Keil\ARM\CMSIS\5.5.1\CMSIS\Core\Include
-  D:\Keil\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include
+  D:\Keil v5\ARM\PACK\ARM\CMSIS\5.8.0\CMSIS\Core\Include
+  D:\Keil v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
 
 <h2>Collection of Component Files used:</h2>
 
-   * Component: ARM::CMSIS:CORE:5.2.0
-Build Time Elapsed:  00:00:11
+   * Component: ARM::CMSIS:CORE:5.5.0
+      Include file:  CMSIS\Core\Include\tz_context.h
+Target not created.
+Build Time Elapsed:  00:00:03
 </pre>
 </body>
 </html>

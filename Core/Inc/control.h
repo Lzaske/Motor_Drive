@@ -37,7 +37,8 @@ void command_Run(void); // 命令
 void status_Run(void); // 状态
 void control_Send(uint8_t cmd, uint8_t id, int64_t value); // 发送
 void control_Receive(void);     // 接收
-uint8_t control_CheckReceivedData(void);
+
+//uint8_t control_CheckReceivedData(void);
 void control_PackCmd(uint8_t *buffer, uint8_t cmd, uint8_t id, uint8_t dataSize, uint8_t *data); // 打包
 
 #ifdef __cplusplus 

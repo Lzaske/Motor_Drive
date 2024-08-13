@@ -7,6 +7,7 @@
 "motor_drive\usart.o"
 "motor_drive\stm32f4xx_it.o"
 "motor_drive\stm32f4xx_hal_msp.o"
+"motor_drive\control.o"
 "motor_drive\stm32f4xx_hal_tim.o"
 "motor_drive\stm32f4xx_hal_tim_ex.o"
 "motor_drive\stm32f4xx_hal_uart.o"

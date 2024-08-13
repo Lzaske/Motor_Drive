@@ -1,3 +1,7 @@
+/*
+ * @brief	控制模块
+ * @note	
+ */
 #include "control.h"
 #include "gpio.h"
 #include "rs485_drc.h"
@@ -79,7 +83,7 @@ void control_Send(uint8_t cmd, uint8_t id, int64_t value)
         dataSize = 2;
 
         control_PackCmd(_485tx_buffer, cmd, id, dataSize, (uint8_t *)&openCtlData);
-        HAL_UART_Transmit_DMA(&huart1, _485tx_buffer, _485txDataSize);
+        RS485_Transmit(_485tx_buffer,_485txDataSize);
         _485txDataSize = LEAST_FRAME_SIZE + 7 + 1;
     }
     else if (cmd == CMD_TORQUE_CONTROL)
@@ -88,7 +92,7 @@ void control_Send(uint8_t cmd, uint8_t id, int64_t value)
         dataSize = 2;
 
         control_PackCmd(_485tx_buffer, cmd, id, dataSize, (uint8_t *)&torqueCtlData);
-        HAL_UART_Transmit_DMA(&huart1, _485tx_buffer, _485txDataSize);
+        RS485_Transmit(_485tx_buffer,_485txDataSize);
         _485txDataSize = LEAST_FRAME_SIZE + 7 + 1;
     }
     else if (cmd == CMD_SPEED_CONTROL)
@@ -97,7 +101,7 @@ void control_Send(uint8_t cmd, uint8_t id, int64_t value)
         dataSize = 4;
 
         control_PackCmd(_485tx_buffer, cmd, id, dataSize, (uint8_t *)&speedCtlData);
-        HAL_UART_Transmit_DMA(&huart1, _485tx_buffer, _485txDataSize);
+        RS485_Transmit(_485tx_buffer,_485txDataSize);
         _485txDataSize = LEAST_FRAME_SIZE + 7 + 1;
     }
     else if (cmd == CMD_ANGLE_CONTROL1)
@@ -106,7 +110,7 @@ void control_Send(uint8_t cmd, uint8_t id, int64_t value)
         dataSize = 8;
 
         control_PackCmd(_485tx_buffer, cmd, id, dataSize, (uint8_t *)&angleCtlData);
-        HAL_UART_Transmit_DMA(&huart1, _485tx_buffer, _485txDataSize);
+        RS485_Transmit(_485tx_buffer,_485txDataSize);
         _485txDataSize = LEAST_FRAME_SIZE + 7 + 1;
     }
 }
@@ -119,6 +123,16 @@ void control_Send(uint8_t cmd, uint8_t id, int64_t value)
 void control_Receive(void)
 {
     RS485_ReceiveData(received_data, 0);
+}
+
+/*********************************************************************************
+ * @brief	检查电机回复数据
+ * @param	None
+ * @retval	None
+ *********************************************************************************/
+uint8_t control_CheckReceivedData(void)
+{
+
 }
 
 /*********************************************************************************
@@ -145,7 +159,7 @@ void command_Run(void)
         // 当tick为20时，检查是否收到数据，并更新发送和未接收计数
         else if (tick == 20)
         {
-            receivedFlag = control_CheckReceivedData();
+            receivedFlag = control_CheckReceivedData(); // 检查是否收到数据
 
             commandSendCount++;
             // 如果未收到回复，未接收计数加一
@@ -180,15 +194,15 @@ void status_Run(void)
 
         if (tick == 500)
         {
-            LED1_TOGGLE();
+            LED_toggle();
 
-            printf ("motorTemperature = %d, motorPowerOrTorque = %d, motorSpeed = %d, motorEncoder = %d\n", motorTemperature, motorPowerOrTorque, motorSpeed, motorEncoder);
+                //printf("motorTemperature = %d, motorPowerOrTorque = %d, motorSpeed = %d, motorEncoder = %d\n", motorTemperature, motorPowerOrTorque, motorSpeed, motorEncoder);
         }
         else if (tick == 1000)
         {
-            LED1_TOGGLE();
+            LED_toggle();
 
-            printf ("commandSendCount = %d, unreceivedCount = %d\n", commandSendCount, commandUnreceivedCount);
+            //printf ("commandSendCount = %d, unreceivedCount = %d\n", commandSendCount, commandUnreceivedCount);
         }
     }
     else
@@ -196,4 +210,67 @@ void status_Run(void)
 
         tick = 0;
     }
+}
+
+/*
+* @brief	控制初始化
+* @param	None
+* @retval	None
+*/
+void control_Init(void)
+{
+    // 初始化控制命令
+    ctlCmd = CMD_OPEN_CONTROL;
+    ctlValue = 0;
+    // 初始化电机ID
+    motorId = 1;
+    // 初始化发送和未接收计数
+    commandSendCount = 0;
+    commandUnreceivedCount = 0;
+}
+
+/* 
+* @brief	角速度模式控制
+* @param	None
+* @retval	None
+*/
+void control_SpeedMode(void)
+{
+    // 速度环控制
+    ctlCmd = CMD_SPEED_CONTROL;
+    // 速度环控制值
+    ctlValue = 1000;
+    // 电机ID
+    motorId = 1;
+}
+
+/* 
+* @brief	位置模式控制
+* @param	None
+* @retval	None
+*/
+void control_AngleMode(void)
+{
+    // 位置环控制
+    ctlCmd = CMD_ANGLE_CONTROL1;
+    // 位置环控制值
+    ctlValue = 0;
+    // 电机ID
+    motorId = 1;
+}
+
+/*
+* @brief	力矩模式控制
+* @param	None
+* @retval	None
+*/
+
+void control_TorqueMode(void)
+{
+    // 力矩环控制
+    ctlCmd = CMD_TORQUE_CONTROL;
+    // 力矩环控制值
+    ctlValue = 0;
+    // 电机ID
+    motorId = 1;
 }

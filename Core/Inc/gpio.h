@@ -33,14 +33,16 @@ extern "C" {
 /* USER CODE END Includes */
 
 /* USER CODE BEGIN Private defines */
+#define LED_on()       HAL_GPIO_WritePin(TEST_LED_GPIO_Port, TEST_LED_Pin, GPIO_PIN_SET)
+#define LED_off()      HAL_GPIO_WritePin(TEST_LED_GPIO_Port, TEST_LED_Pin, GPIO_PIN_RESET)
+#define LED_toggle()   HAL_GPIO_TogglePin(TEST_LED_GPIO_Port, TEST_LED_Pin)
+  /* USER CODE END Private defines */
 
-/* USER CODE END Private defines */
+  void MX_GPIO_Init(void);
 
-void MX_GPIO_Init(void);
+  /* USER CODE BEGIN Prototypes */
 
-/* USER CODE BEGIN Prototypes */
-
-/* USER CODE END Prototypes */
+  /* USER CODE END Prototypes */
 
 #ifdef __cplusplus
 }
